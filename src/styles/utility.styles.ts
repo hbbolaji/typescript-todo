@@ -25,7 +25,7 @@ interface TextType {
   size: number
   color: string
   align?: string
-  done?: string
+  done?: boolean
 }
 
 interface ListType {
@@ -108,13 +108,12 @@ const Text = styled.p<TextType>`
   text-decoration: ${props => props.done ? 'line-through' : 'none'};
 `
 
-const Check = styled.div`
+const Check = styled.div<{done: boolean}>`
   height: 20px;
   width: 20px;
   border: 1px solid #374151;
   border-radius: 20px;
-  /* margin: 0px 10px; */
-  background: linear-gradient(65deg, #60A5FA, #5B21B6);
+  background: ${props => props.done ? 'linear-gradient(65deg, #60A5FA, #5B21B6)': 'transparent'};
 `
 
 const Input = styled.input`

@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import TodoStore from './store/TodoStore'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TodoStore>
+      <App />
+    </TodoStore>
   </React.StrictMode>,
   document.getElementById('root')
 );

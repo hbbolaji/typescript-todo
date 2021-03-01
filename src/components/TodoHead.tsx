@@ -1,7 +1,7 @@
 import React from 'react'
 import { DynamicContainer, Text } from '../styles/utility.styles'
 
-const TodoHead = () => {
+const TodoHead:React.FC = ():JSX.Element => {
   return (
     <DynamicContainer row justify="space-between" mb={1.5}>
       <Text size={2} color="white">Todo</Text>
