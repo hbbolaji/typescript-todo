@@ -5,11 +5,22 @@ import TodoHead from './components/TodoHead'
 import CreateTodo from './components/CreateTodo'
 import TodoFilter from './components/TodoFilter'
 import TodoList from './components/TodoList'
+import Completed from './components/Completed'
+import Active from './components/Active'
 import {TodoContext} from './store/TodoStore'
+// import Todo from './components/Todo';
 
-
+const Todos = (status: string) => {
+  if (status === 'all') {
+    return <TodoList />
+  } else if (status === 'completed') {
+    return <Completed />
+  } else if (status === 'active') {
+    return <Active />
+  }
+}
 const App:React.FC = ():JSX.Element => {
-  const {todos, clearCompeleted} = useContext(TodoContext)
+  const {state, clearCompeleted, status} = useContext(TodoContext)
   const [images] = useState<[string, string]>([
     'https://image.freepik.com/free-vector/blue-night-sky-with-mountain-landscape-illustration_105940-228.jpg', 
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ1FzCHEqmwl1bItY_8xTp372sQh0slltKZw&usqp=CAU'
@@ -25,10 +36,10 @@ const App:React.FC = ():JSX.Element => {
             <CreateTodo />
           </Box>
           <Box>
-            <TodoList />
+            {Todos(status)}
             <DynamicContainer padding={10} row justify="center" align="center">
               <FlexItem>
-                <Text size={0.9} color="gray">{todos.length} items left</Text>
+                <Text size={0.9} color="gray">{state.length} items left</Text>
               </FlexItem>
               <FlexItem>
                 <MobileContainer row justify="center" align="center">
