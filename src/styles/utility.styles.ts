@@ -28,10 +28,6 @@ interface TextType {
   done?: boolean
 }
 
-interface ListType {
-  color: string
-}
-
 const Container = styled.div<ContainerType>`
   background: ${props => props.dark ? '#111827': "#F9FAFB"};
   min-height: 100vh;
@@ -125,10 +121,9 @@ const Input = styled.input`
   outline: none;
   color: #9CA3AF;
 `
-const List = styled.li<ListType>`
+const List = styled.li`
   padding: 10px 0px;
   border-bottom: 1px solid #494C6B;
-  color: ${props => props.color};
 `
 
 const ListContainer = styled.ul`

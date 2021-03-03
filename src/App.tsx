@@ -8,7 +8,6 @@ import TodoList from './components/TodoList'
 import Completed from './components/Completed'
 import Active from './components/Active'
 import {TodoContext} from './store/TodoStore'
-// import Todo from './components/Todo';
 
 const Todos = (status: string) => {
   if (status === 'all') {
@@ -37,6 +36,7 @@ const App:React.FC = ():JSX.Element => {
           </Box>
           <Box>
             {Todos(status)}
+            {/* <TodoList /> */}
             <DynamicContainer padding={10} row justify="center" align="center">
               <FlexItem>
                 <Text size={0.9} color="gray">{state.length} items left</Text>

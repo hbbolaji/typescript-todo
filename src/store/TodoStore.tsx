@@ -8,7 +8,8 @@ interface Todo {
 type TodoType = {
   state: Todo[]
   status: string
-  changeList: (list: string) => void,
+  changeList: (list: string) => void
+  changeState: (newState: Todo[]) => void
   addTodo: (task: string) => void
   deleteTask: (todo: Todo) => void
   changeStatus: (todo: Todo) => void
@@ -19,6 +20,7 @@ const initialState = {
   state: [],
   status: 'all',
   changeList: () => {},
+  changeState: () => {},
   addTodo: () => {},
   deleteTask: () => {},
   changeStatus: () => {},
@@ -32,6 +34,10 @@ const TodoProvider: React.FC = ({children}) => {
   const [status, setStatus] = useState<string>(initialState.status)
   const addTodo = (task: string) => {
     setState([{task, completed: false}, ...state])
+  }
+
+  const changeState = (newState: Todo[]) => {
+    setState(newState)
   }
 
   const deleteTask = (task: Todo ) => {
@@ -58,7 +64,7 @@ const TodoProvider: React.FC = ({children}) => {
   } 
 
   return (
-    <TodoContext.Provider value={{state, status, changeList, addTodo, deleteTask, changeStatus, clearCompeleted}}>
+    <TodoContext.Provider value={{state, status, changeList, changeState, addTodo, deleteTask, changeStatus, clearCompeleted}}>
       {children}
     </TodoContext.Provider>
   )
