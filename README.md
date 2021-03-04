@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Working prototype available @ https://todoapptypescript.vercel.app/ [Draggable typescript todo](https://todoapptypescript.vercel.app/)
 
 ## Available Scripts
 
