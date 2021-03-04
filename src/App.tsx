@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import './App.css'
-import {Container, Image, TodoContainer, DynamicContainer, Box, MobileBox, Text, MobileContainer, FlexItem} from './styles/utility.styles'
+import {Container, Image, TodoContainer, DynamicContainer, Box, MobileBox, Write, MobileContainer, FlexItem} from './styles/utility.styles'
 import TodoHead from './components/TodoHead'
 import CreateTodo from './components/CreateTodo'
 import TodoFilter from './components/TodoFilter'
@@ -8,6 +8,7 @@ import TodoList from './components/TodoList'
 import Completed from './components/Completed'
 import Active from './components/Active'
 import {TodoContext} from './store/TodoStore'
+import {ThemeContext} from './store/ThemeContext'
 
 const Todos = (status: string) => {
   if (status === 'all') {
@@ -20,26 +21,26 @@ const Todos = (status: string) => {
 }
 const App:React.FC = ():JSX.Element => {
   const {state, clearCompeleted, status} = useContext(TodoContext)
+  const {color} = useContext(ThemeContext)
   const [images] = useState<[string, string]>([
     'https://image.freepik.com/free-vector/blue-night-sky-with-mountain-landscape-illustration_105940-228.jpg', 
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ1FzCHEqmwl1bItY_8xTp372sQh0slltKZw&usqp=CAU'
   ])
 
   return (
-    <Container dark={true}>
+    <Container dark={color}>
       <Image src={images}></Image>
       <TodoContainer>
         <DynamicContainer row={false}>
           <TodoHead />
-          <Box>
+          <Box dark={color}>
             <CreateTodo />
           </Box>
-          <Box>
+          <Box dark={color}>
             {Todos(status)}
-            {/* <TodoList /> */}
             <DynamicContainer padding={10} row justify="center" align="center">
               <FlexItem>
-                <Text size={0.9} color="gray">{state.length} items left</Text>
+                <Write dark={color} align="left" size={0.9}>{state.length} {state.length === 1 ? 'item' : 'items'} left</Write>
               </FlexItem>
               <FlexItem>
                 <MobileContainer row justify="center" align="center">
@@ -47,11 +48,11 @@ const App:React.FC = ():JSX.Element => {
                 </MobileContainer>
               </FlexItem>
               <FlexItem>
-                <Text align="right" size={0.9} color="gray" onClick={()=>clearCompeleted()}>Clear Completed </Text>
+                <Write className="pointer" dark={color} align="right" size={0.9} onClick={()=>clearCompeleted()}>Clear Completed </Write>
               </FlexItem>
             </DynamicContainer>
           </Box>
-          <MobileBox>
+          <MobileBox dark={color}>
             <TodoFilter />
           </MobileBox>
         </DynamicContainer>

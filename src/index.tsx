@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import TodoStore from './store/TodoStore'
+import ThemeProvider from './store/ThemeContext'
 
 ReactDOM.render(
   <React.StrictMode>
     <TodoStore>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </TodoStore>
   </React.StrictMode>,
   document.getElementById('root')

@@ -19,17 +19,50 @@ interface DynamicType {
 
 interface BoxType {
   height?: number
+  dark?: boolean
 }
 
 interface TextType {
   size: number
-  color: string
   align?: string
+  dark?: boolean
   done?: boolean
+  statusColor?: boolean
 }
 
+const Write = styled.p<TextType>`
+  font-size: ${props => `${props.size}em`};
+  text-align: ${props => props.align};
+  /* color: ${props => props.dark ? "#9CA3AF" : '#374151'}; */
+  color: ${props => {
+    if (!props.done && props.dark) {
+      /* incomplete task and dark mode */
+      return '#D1D5DB'
+    } else if (!props.done && !props.dark) {
+      /* incomplete task and light mode */
+      return '#1F2937'
+    } else if (props.done && props.dark) {
+      /* complete task and dark mode */
+      return '#6B7280'
+    } else if (props.done && !props.dark) {
+      /* complete task and light mode */
+      return '#6B7280'
+    } else if (props.statusColor) {
+      return 'blue'
+    } else {
+      return '#D1D5DB'
+    }
+  }};
+  text-decoration: ${props => props.done ? 'line-through' : 'none'};
+  text-decoration-thickness: 3px;
+`
+
+const Head = styled(Write)`
+  color: white;
+`
+
 const Container = styled.div<ContainerType>`
-  background: ${props => props.dark ? '#111827': "#F9FAFB"};
+  background: ${props => props.dark ? '#111827': "#E5E7EB"};
   min-height: 100vh;
   font-family: 'Josefin Sans', sans-serif;
   margin: 0;
@@ -84,7 +117,7 @@ const MobileContainer = styled(DynamicContainer)`
 `
 
 const Box = styled.div<BoxType>`
-  background: #1F2937;
+  background: ${props => props.dark ? "#1F2937" : "#F9FAFB"};
   height: ${props => `${props.height}px`};
   margin-bottom: 10px;
   padding: 10px;
@@ -95,13 +128,6 @@ const MobileBox = styled(Box)`
   @media (max-width: 800px) {
     display: block;
   }
-`
-
-const Text = styled.p<TextType>`
-  font-size: ${props =>`${props.size}em`};
-  color: ${props => props.color};
-  text-align: ${props => props.align};
-  text-decoration: ${props => props.done ? 'line-through' : 'none'};
 `
 
 const Check = styled.div<{done: boolean}>`
@@ -130,4 +156,4 @@ const ListContainer = styled.ul`
   list-style-type: none;
 `
 
-export { Container, Image, TodoContainer, DynamicContainer, Box, MobileBox, Text, Check, Input, MobileContainer, FlexItem, List, ListContainer}
+export { Write, Head, Container, Image, TodoContainer, DynamicContainer, Box, MobileBox, Check, Input, MobileContainer, FlexItem, List, ListContainer}

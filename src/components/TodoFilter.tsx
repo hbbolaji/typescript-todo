@@ -1,20 +1,22 @@
 import React, {useContext} from 'react'
-import {DynamicContainer, Text} from '../styles/utility.styles'
+import {DynamicContainer, Write} from '../styles/utility.styles'
 import {TodoContext} from '../store/TodoStore'
+import {ThemeContext} from '../store/ThemeContext'
 
 const TodoFilter = () => {
-  const {changeList} = useContext(TodoContext)
+  const {changeList, status} = useContext(TodoContext)
+  const {color} = useContext(ThemeContext)
   return (
     <DynamicContainer width={100} row justify="space-around" align="center">
-      <Text size={0.9} color="blue" onClick={() => {
+      <Write className="pointer" style={{color: status === 'all'? 'blue' : ''}} dark={color} size={0.9} onClick={() => {
         changeList('all')
-      }}>All</Text>
-      <Text size={0.9} color="gray" onClick={() => {
+      }}>All</Write>
+      <Write className="pointer" style={{color: status === 'active'? 'blue' : ''}} statusColor={status === 'active'} dark={color} size={0.9} onClick={() => {
         changeList('active')
-      }}>Active</Text>
-      <Text size={0.9} color="gray" onClick={() => {
+      }}>Active</Write>
+      <Write className="pointer" style={{color: status === 'completed'? 'blue' : ''}} statusColor={status === 'completed'} dark={color} size={0.9} onClick={() => {
         changeList('completed')
-      }}>Completed</Text>
+      }}>Completed</Write>
     </DynamicContainer>
   )
 }
